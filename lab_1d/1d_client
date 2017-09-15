@@ -140,15 +140,19 @@ class Protocol_client(asyncio.Protocol):
     def connection_lost(self, exc):
             print("404! connection lost")
             self.loop.Stop()
+            
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
 
+    #x=loop.create_connection(lambda :Protocol_client(),host='127.0.0.1',port=8888)
+
     x = playground.getConnector().create_playground_connection(lambda: Protocol_client(loop), '1777.1.1.1', 8888)
-    trans,pro=loop.run_until_complete(x)
     pkg1 = RstConnectPkg()
     pkg1.msg = "let's build a connection"
     pkg1.ID = 100
 
+
+    trans,pro=loop.run_until_complete(x)
     pro.send_packet(pkg1)
     loop.run_forever()
     loop.close()
