@@ -158,9 +158,11 @@ class Protocol_server(asyncio.Protocol):
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     loop.set_debug(1)
-    y= playground.getConnector().create_playground_server(Protocol_server, 8888)
+    y= playground.getConnector().create_playground_server(lambda:Protocol_server(), 8888)
+    #y=loop.create_server(lambda :Protocol_server(),port=8888)
     server = loop.run_until_complete(y)
 
 
     loop.run_forever()
+    server.close()
     loop.close()
