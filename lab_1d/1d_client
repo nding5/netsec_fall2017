@@ -89,10 +89,10 @@ class C_AnswerP():
 
 
 class Protocol_client(asyncio.Protocol):
-    def __init__(self,loop):
+    def __init__(self):
         self.transport = None
         self.state= 0
-        self.loop=loop
+       # self.loop=loop
 
 
     def connection_made(self, transport):
@@ -146,7 +146,7 @@ if __name__ == "__main__":
 
     #x=loop.create_connection(lambda :Protocol_client(),host='127.0.0.1',port=8888)
 
-    x = playground.getConnector().create_playground_connection(lambda: Protocol_client(loop), '1777.1.1.1', 8888)
+    x = playground.getConnector().create_playground_connection(lambda: Protocol_client(), '1777.1.1.1', 8888)
     pkg1 = RstConnectPkg()
     pkg1.msg = "let's build a connection"
     pkg1.ID = 100
