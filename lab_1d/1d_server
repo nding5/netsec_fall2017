@@ -127,7 +127,7 @@ class Protocol_server(asyncio.Protocol):
 
            elif isinstance(pkt,BConPkg):
 
-                print(pkt.con_nect)
+               
 
                 if self.check_id(pkt.ID):
                      back_packet = QuestionP()
