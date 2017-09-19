@@ -39,8 +39,7 @@ class passThrough2(StackingProtocol):
     def data_received(self, data):
         print("Client :data received")
         self.higherProtocol().data_received(data)
-        if self.higherProtocol().state==3:
-            self.transport.lost()
+        
 
     def connection_lost(self, exc=None):
         print("Client : connection lost")
