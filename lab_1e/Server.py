@@ -6,7 +6,7 @@ from playground.network.packet.fieldtypes import STRING,UINT16,ListFieldType,BUF
 from playground.asyncio_lib.testing import TestLoopEx
 from passthrough import *
 from playground.network.common import StackingProtocol,StackingProtocolFactory,StackingTransport
-
+import logging
 ###
 class RstConnectPkg (PacketType):
     DEFINITION_IDENTIFIER = "Request a connection"
@@ -160,7 +160,8 @@ if __name__ == "__main__":
     #y= playground.getConnector().create_playground_server(lambda:Protocol_server(),38099)
     #y=loop.create_server(lambda :Protocol_server(),port=8888)
     y= playground.getConnector('passTo').create_playground_server(lambda: Protocol_server(),38099)
-#
+    logging.getLogger().setLevel(logging.NOTSET)  # this logs *everything*
+    logging.getLogger().addHandler(logging.StreamHandler())  # logs to stderr
     server = loop.run_until_complete(y)
 
 
