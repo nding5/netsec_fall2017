@@ -4,6 +4,7 @@ import asyncio
 import playground
 from playground.network.common import StackingProtocol,StackingProtocolFactory,StackingTransport
 from passthrough import *
+import logging
 
 class RstConnectPkg (PacketType):
     DEFINITION_IDENTIFIER = "Request a connection"
@@ -146,6 +147,8 @@ if __name__ == "__main__":
 
     #x = playground.getConnector().create_playground_connection(lambda: Protocol_client(), '1888.1.1.1', 38099)
     x=playground.getConnector('passTo').create_playground_connection(lambda: Protocol_client(), '1888.1.1.1', 38099)
+    logging.getLogger().setLevel(logging.NOTSET)  # this logs *everything*
+    logging.getLogger().addHandler(logging.StreamHandler())  # logs to stderr
     pkg1 = RstConnectPkg()
     pkg1.msg = "let's build a connection"
     pkg1.ID = 100
